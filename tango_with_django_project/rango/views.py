@@ -24,7 +24,6 @@ def index(request):
 
 
 def about(request):
-    # Spoiler: you don't need to pass a context dictionary here.
     return render(request, 'rango/about.html')
 
 
@@ -55,7 +54,7 @@ def add_category(request):
             form.save(commit=True)
             # Now that the category is saved, we could confirm this.
             # For now, just redirect the user back to the index view.
-            return redirect('/rango/')
+            return redirect(reverse('rango:index'))
         else:
             # The supplied form contained errors
             # just print them to the terminal.
@@ -73,7 +72,7 @@ def add_page(request, category_name_slug):
 
 
     if category is None:
-        return redirect('/rango/')
+        return redirect(reverse('rango:index'))
 
     form = PageForm()
 
